@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photos — Akilesh Ramakrishna</title>
+  <meta name="description" content="Photography by Akilesh Ramakrishna.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <a href="index.html" class="site-nav__logo"><img src="meditation_logo.png" alt="Logo">Akilesh Ramakrishna</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.site-nav__links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav__links">
+      <li><a href="writing.html">Writing</a></li>
+      <li><a href="photos.html" class="active">Photos</a></li>
+      <li><a href="books.html">Books</a></li>
+      <li><a href="newsletter.html">Newsletter</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="container--wide">
+    <section class="section-header" style="max-width: var(--max-width); margin: 0 auto;">
+      <h1 class="section-header__title">Photos</h1>
+      <p class="section-header__desc">Moments captured. Click any image to view it larger.</p>
+    </section>
+
+    <div class="photo-grid">
+      <div class="photo-grid__item" onclick="openLightbox(this)">
+        <img src="photo-01.jpg" alt="Mountain road, Himalayas" data-caption="Mountain road, Himalayas">
+      </div>
+      <div class="photo-grid__item" onclick="openLightbox(this)">
+        <img src="photo-07.jpg" alt="Pangong Lake, Ladakh" data-caption="Pangong Lake, Ladakh">
+      </div>
+      <div class="photo-grid__item" onclick="openLightbox(this)">
+        <img src="photo-03.jpg" alt="Tea plantations, Munnar" data-caption="Tea plantations, Munnar">
+      </div>
+      <div class="photo-grid__item" onclick="openLightbox(this)">
+        <img src="photo-04.jpg" alt="Jacaranda trees, tea hills" data-caption="Jacaranda trees, tea hills">
+      </div>
+      <div class="photo-grid__item" onclick="openLightbox(this)">
+        <img src="photo-06.jpg" alt="Flower fields, Turtuk valley" data-caption="Flower fields, Turtuk valley">
+      </div>
+      <div class="photo-grid__item" onclick="openLightbox(this)">
+        <img src="photo-02.jpg" alt="Peaks, Himalayan range" data-caption="Peaks, Himalayan range">
+      </div>
+      <div class="photo-grid__item" onclick="openLightbox(this)">
+        <img src="photo-05.jpg" alt="Cloud-wrapped summit, Karakoram" data-caption="Cloud-wrapped summit, Karakoram">
+      </div>
+      <div class="photo-grid__item" onclick="openLightbox(this)">
+        <img src="photo-08.jpg" alt="Pangong shore, Ladakh" data-caption="Pangong shore, Ladakh">
+      </div>
+      <div class="photo-grid__item" onclick="openLightbox(this)">
+        <img src="photo-09.jpg" alt="Dharamshala" data-caption="Dharamshala">
+      </div>
+    </div>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox__close" aria-label="Close">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox__caption" id="lightbox-caption"></div>
+  </div>
+
+  <footer class="site-footer">
+    &copy; 2026 Akilesh Ramakrishna. All rights reserved.
+  </footer>
+
+  <script>
+    function openLightbox(el) {
+      const img = el.querySelector('img');
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox-img').alt = img.alt;
+      document.getElementById('lightbox-caption').textContent = img.dataset.caption || '';
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+</body>
+</html>

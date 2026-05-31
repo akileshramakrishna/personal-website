@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Akilesh Ramakrishna</title>
+  <meta name="description" content="About Akilesh Ramakrishna.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <a href="index.html" class="site-nav__logo"><img src="meditation_logo.png" alt="Logo">Akilesh Ramakrishna</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.site-nav__links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav__links">
+      <li><a href="writing.html">Writing</a></li>
+      <li><a href="photos.html">Photos</a></li>
+      <li><a href="books.html">Books</a></li>
+      <li><a href="newsletter.html">Newsletter</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section class="about-section">
+      <div class="section-header" style="padding-bottom: 2.5rem;">
+        <h1 class="section-header__title">About</h1>
+      </div>
+
+      <div class="about-content">
+        <div class="about-photo">
+          <!-- Replace with your photo: <img src="images/headshot.jpg" alt="Akilesh Ramakrishna"> -->
+          Your photo
+        </div>
+        <div class="about-text">
+          <p>
+            Hi, I'm Akilesh. Welcome to my personal page where I share writing, photography, and book recommendations.
+          </p>
+          <p>
+            I built this site to share what moves me in this world and to connect our individual experience with the universal. Many of the writings and pictures captured from the site are taken from journal entries and trips years ago. Just as time's sands pass through our hands, the Truth slips from our fingers; revisiting these profound moments helps ground me in the Real.
+          </p>
+          <p>
+            To more life and more love, shared together.
+          </p>
+          <p style="margin-top: 1.5rem;">
+            <strong>Get in touch</strong><br>
+            <span style="color: var(--color-text-muted);">
+              Email me at <a href="mailto:akileshr0@gmail.com" style="color: var(--color-text); text-decoration: underline;">akileshr0@gmail.com</a>
+            </span>
+          </p>
+
+          <div style="display: flex; gap: 1.5rem; margin-top: 1.5rem;">
+            <a href="https://www.linkedin.com/in/akileshramak" target="_blank" style="color: var(--color-text-muted); font-size: 0.85rem;">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    &copy; 2026 Akilesh Ramakrishna. All rights reserved.
+  </footer>
+</body>
+</html>

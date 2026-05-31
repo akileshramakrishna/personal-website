@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post Title — Akilesh Ramakrishna</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .post { padding: 4rem 0; }
+    .post__date { font-size: 0.8rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.8rem; }
+    .post__title { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 2rem; line-height: 1.25; }
+    .post__body { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.85; }
+    .post__body p { margin-bottom: 1.4rem; }
+    .post__body h2 { font-family: var(--font-sans); font-size: 1.3rem; font-weight: 600; margin: 2.5rem 0 1rem; }
+    .post__body blockquote { border-left: 3px solid var(--color-border); padding-left: 1.2rem; color: var(--color-text-muted); margin: 1.5rem 0; font-style: italic; }
+    .post__body img { border-radius: 6px; margin: 2rem 0; }
+    .post__back { display: inline-block; margin-top: 3rem; font-size: 0.85rem; color: var(--color-text-muted); }
+    .post__back:hover { color: var(--color-text); }
+  </style>
+</head>
+<body>
+  <nav class="site-nav">
+    <a href="index.html" class="site-nav__logo"><img src="meditation_logo.png" alt="Logo">Akilesh Ramakrishna</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.site-nav__links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav__links">
+      <li><a href="writing.html" class="active">Writing</a></li>
+      <li><a href="photos.html">Photos</a></li>
+      <li><a href="books.html">Books</a></li>
+      <li><a href="newsletter.html">Newsletter</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <article class="post">
+      <div class="post__date">May 28, 2026</div>
+      <h1 class="post__title">Your Blog Post Title Goes Here</h1>
+      <div class="post__body">
+        <p>This is a template for individual blog posts. When you write a new post, duplicate this file, rename it (e.g., <code>my-great-post.html</code>), and replace the content.</p>
+
+        <p>The body text uses a serif font for comfortable long-form reading, while headings stay in the sans-serif to maintain visual hierarchy.</p>
+
+        <h2>A Section Heading</h2>
+
+        <p>You can organize longer posts with section headings. Keep them concise and descriptive.</p>
+
+        <blockquote>You can also include blockquotes for emphasis or to cite someone else's words.</blockquote>
+
+        <p>To add images, just drop them in an <code>images/</code> folder and reference them:</p>
+        <!-- <img src="images/your-image.jpg" alt="Description of the image"> -->
+
+        <p>When your post is ready, add a card linking to it on the Writing page. That's the whole workflow.</p>
+      </div>
+      <a href="writing.html" class="post__back">&larr; Back to Writing</a>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    &copy; 2026 Akilesh Ramakrishna. All rights reserved.
+  </footer>
+</body>
+</html>

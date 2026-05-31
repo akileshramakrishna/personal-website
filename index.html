@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akilesh Ramakrishna</title>
+  <meta name="description" content="Personal website of Akilesh Ramakrishna — writing, photography, books, and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <a href="index.html" class="site-nav__logo"><img src="meditation_logo.png" alt="Logo">Akilesh Ramakrishna</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.site-nav__links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav__links">
+      <li><a href="writing.html">Writing</a></li>
+      <li><a href="photos.html">Photos</a></li>
+      <li><a href="books.html">Books</a></li>
+      <li><a href="newsletter.html">Newsletter</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <h1 class="hero__title">Hello, I'm Akilesh.</h1>
+      <p class="hero__subtitle">
+        Welcome to my home page. I built this site to share what moves me in this world. You can find writing, photography from travels, and books I've loved to connect our individual experience with the universal.
+      </p>
+    </section>
+
+    <section style="padding-bottom: 3rem;">
+      <h2 style="font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 1.5rem;">Recent Writing</h2>
+      <div class="card-list">
+        <a href="on-journaling.html" class="card">
+          <div class="card__date">May 2026</div>
+          <div class="card__title">On Journaling</div>
+          <div class="card__excerpt">The practical purpose of journaling is to capture the thoughts and emotions of our day. The ethical purpose to reflect on how the events have moved us and formed our thinking.</div>
+        </a>
+      </div>
+    </section>
+
+    <section class="newsletter-section">
+      <div class="newsletter-box">
+        <h2 class="newsletter-box__title">Stay in the loop</h2>
+        <p class="newsletter-box__desc">Occasional updates on new writing and photos. No spam, unsubscribe anytime.</p>
+        <form class="newsletter-form" action="https://YOUR_MAILCHIMP_URL" method="post" target="_blank">
+          <input type="email" name="EMAIL" placeholder="your@email.com" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    &copy; 2026 Akilesh Ramakrishna. All rights reserved.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newsletter — Akilesh Ramakrishna</title>
+  <meta name="description" content="Subscribe to updates from Akilesh Ramakrishna.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <a href="index.html" class="site-nav__logo"><img src="meditation_logo.png" alt="Logo">Akilesh Ramakrishna</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.site-nav__links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav__links">
+      <li><a href="writing.html">Writing</a></li>
+      <li><a href="photos.html">Photos</a></li>
+      <li><a href="books.html">Books</a></li>
+      <li><a href="newsletter.html" class="active">Newsletter</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section style="padding: 6rem 0; text-align: center;">
+      <h1 style="font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem;">Newsletter</h1>
+      <p style="color: var(--color-text-muted); max-width: 460px; margin: 0 auto 2.5rem; line-height: 1.7;">
+        I send occasional emails when I publish something new — a blog post, a photo series, or a book recommendation. Unsubscribe anytime.
+      </p>
+
+      <div class="newsletter-box" style="text-align: left;">
+        <h2 class="newsletter-box__title">Subscribe</h2>
+        <p class="newsletter-box__desc">Join the list and get new posts delivered to your inbox.</p>
+
+        <!--
+          MAILCHIMP INTEGRATION:
+          1. Log into Mailchimp → Audience → Signup forms → Embedded forms
+          2. Copy the form action URL (starts with https://XXXX.us##.list-manage.com/subscribe/post?u=...)
+          3. Replace YOUR_MAILCHIMP_URL below with that URL
+          4. The input name "EMAIL" is standard for Mailchimp
+        -->
+        <form class="newsletter-form" action="https://YOUR_MAILCHIMP_URL" method="post" target="_blank">
+          <input type="email" name="EMAIL" placeholder="your@email.com" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+
+      <p style="color: var(--color-text-muted); font-size: 0.8rem; margin-top: 1.5rem;">
+        Powered by Mailchimp. Your email will never be shared.
+      </p>
+    </section>
+
+    <section style="padding-bottom: 4rem;">
+      <h2 style="font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 1.5rem;">What to Expect</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+        <div>
+          <p style="font-weight: 600; margin-bottom: 0.3rem;">New writing</p>
+          <p style="font-size: 0.9rem; color: var(--color-text-muted);">Essays and reflections as they're published.</p>
+        </div>
+        <div>
+          <p style="font-weight: 600; margin-bottom: 0.3rem;">Photo updates</p>
+          <p style="font-size: 0.9rem; color: var(--color-text-muted);">New photo series and behind-the-scenes notes.</p>
+        </div>
+        <div>
+          <p style="font-weight: 600; margin-bottom: 0.3rem;">Book picks</p>
+          <p style="font-size: 0.9rem; color: var(--color-text-muted);">Occasional reading recommendations worth your time.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    &copy; 2026 Akilesh Ramakrishna. All rights reserved.
+  </footer>
+</body>
+</html>

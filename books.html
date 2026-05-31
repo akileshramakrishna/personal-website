@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Books — Akilesh Ramakrishna</title>
+  <meta name="description" content="Books and reading recommendations by Akilesh Ramakrishna.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .year-section { margin-bottom: 3rem; }
+    .category-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      margin: 1.5rem 0 0.8rem;
+    }
+    .favorites-banner {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .favorites-banner__label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      margin-bottom: 0.8rem;
+    }
+    .book-card__cover {
+      width: 80px;
+      height: 120px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav">
+    <a href="index.html" class="site-nav__logo"><img src="meditation_logo.png" alt="Logo">Akilesh Ramakrishna</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.site-nav__links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav__links">
+      <li><a href="writing.html">Writing</a></li>
+      <li><a href="photos.html">Photos</a></li>
+      <li><a href="books.html" class="active">Books</a></li>
+      <li><a href="newsletter.html">Newsletter</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section class="section-header">
+      <h1 class="section-header__title">Books</h1>
+      <p class="section-header__desc">What I've been reading, with occasional notes on why it mattered.</p>
+    </section>
+
+    <!-- Currently Reading -->
+    <div class="year-section">
+      <h2 style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 1rem; padding-top: 1rem;">Currently Reading</h2>
+
+      <div class="category-label">Fiction</div>
+      <div style="border-top: 1px solid var(--color-border);">
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780143105428-M.jpg" alt="Gora">
+          <div class="book-card__info">
+            <div class="book-card__title">Gora</div>
+            <div class="book-card__author">by Rabindranath Tagore</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-label">Non-Fiction</div>
+      <div style="border-top: 1px solid var(--color-border);">
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780143127130-M.jpg" alt="Thanks for the Feedback">
+          <div class="book-card__info">
+            <div class="book-card__title">Thanks for the Feedback</div>
+            <div class="book-card__author">by Douglas Stone & Sheila Heen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2026 -->
+    <div class="year-section">
+      <h2 style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 1rem;">2026</h2>
+
+      <div class="category-label">Fiction</div>
+      <div style="border-top: 1px solid var(--color-border);">
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780241399002-M.jpg" alt="When We Cease to Understand the World">
+          <div class="book-card__info">
+            <div class="book-card__title">When We Cease to Understand the World</div>
+            <div class="book-card__author">by Benjamín Labatut</div>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780375701870-M.jpg" alt="Go Tell It on the Mountain">
+          <div class="book-card__info">
+            <div class="book-card__title">Go Tell It on the Mountain</div>
+            <div class="book-card__author">by James Baldwin</div>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <div class="book-card__cover" style="background:var(--color-border);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--color-text-muted);">Cover</div>
+          <div class="book-card__info">
+            <div class="book-card__title">Flesh</div>
+            <div class="book-card__author">by David Szalay</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-label">Non-Fiction</div>
+      <div style="border-top: 1px solid var(--color-border);">
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9781250262288-M.jpg" alt="Wanting">
+          <div class="book-card__info">
+            <div class="book-card__title">Wanting</div>
+            <div class="book-card__author">by Luke Burgis</div>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780143106241-M.jpg" alt="The Snow Leopard">
+          <div class="book-card__info">
+            <div class="book-card__title">The Snow Leopard</div>
+            <div class="book-card__author">by Peter Matthiessen</div>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780143036418-M.jpg" alt="The Tree Where Man Was Born">
+          <div class="book-card__info">
+            <div class="book-card__title">The Tree Where Man Was Born</div>
+            <div class="book-card__author">by Peter Matthiessen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2025 -->
+    <div class="year-section">
+      <h2 style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 1rem;">2025</h2>
+
+      <div class="favorites-banner">
+        <div class="favorites-banner__label">Year's Favorites</div>
+        <div style="display: flex; gap: 2.5rem; flex-wrap: wrap;">
+          <div style="display: flex; gap: 1rem; align-items: flex-start;">
+            <img src="https://covers.openlibrary.org/b/isbn/9780060850524-M.jpg" alt="Brave New World" style="width: 70px; height: 105px; object-fit: cover; border-radius: 4px;">
+            <div>
+              <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); margin-bottom: 0.3rem;">Fiction</div>
+              <div style="font-weight: 600;">Brave New World</div>
+              <div style="font-size: 0.85rem; color: var(--color-text-muted);">by Aldous Huxley</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 1rem; align-items: flex-start;">
+            <img src="https://covers.openlibrary.org/b/isbn/9780593544853-M.jpg" alt="Marginlands" style="width: 70px; height: 105px; object-fit: cover; border-radius: 4px;">
+            <div>
+              <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); margin-bottom: 0.3rem;">Non-Fiction</div>
+              <div style="font-weight: 600;">Marginlands</div>
+              <div style="font-size: 0.85rem; color: var(--color-text-muted);">by Arati Kumar-Rao</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-label">Fiction</div>
+      <div style="border-top: 1px solid var(--color-border);">
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780156028356-M.jpg" alt="Life of Pi">
+          <div class="book-card__info">
+            <div class="book-card__title">Life of Pi</div>
+            <div class="book-card__author">by Yann Martel</div>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780553275544-M.jpg" alt="Narcissus and Goldmund">
+          <div class="book-card__info">
+            <div class="book-card__title">Narcissus and Goldmund</div>
+            <div class="book-card__author">by Hermann Hesse</div>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780316300131-M.jpg" alt="Ministry for the Future">
+          <div class="book-card__info">
+            <div class="book-card__title">Ministry for the Future</div>
+            <div class="book-card__author">by Kim Stanley Robinson</div>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <div class="book-card__cover" style="background:var(--color-border);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--color-text-muted);">Cover</div>
+          <div class="book-card__info">
+            <div class="book-card__title">Loneliness of Sonia and Sunny</div>
+            <div class="book-card__author">by Kiran Desai</div>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780140115369-M.jpg" alt="The Storyteller">
+          <div class="book-card__info">
+            <div class="book-card__title">Storyteller</div>
+            <div class="book-card__author">by Mario Vargas Llosa</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-label">Non-Fiction</div>
+      <div style="border-top: 1px solid var(--color-border);">
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780593544662-M.jpg" alt="Slow Productivity">
+          <div class="book-card__info">
+            <div class="book-card__title">Slow Productivity</div>
+            <div class="book-card__author">by Cal Newport</div>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780062316097-M.jpg" alt="Sapiens">
+          <div class="book-card__info">
+            <div class="book-card__title">Sapiens</div>
+            <div class="book-card__author">by Yuval Noah Harari</div>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780374533557-M.jpg" alt="Thinking, Fast and Slow">
+          <div class="book-card__info">
+            <div class="book-card__title">Thinking, Fast and Slow</div>
+            <div class="book-card__author">by Daniel Kahneman</div>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780812988406-M.jpg" alt="When Breath Becomes Air">
+          <div class="book-card__info">
+            <div class="book-card__title">When Breath Becomes Air</div>
+            <div class="book-card__author">by Paul Kalanithi</div>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780425284629-M.jpg" alt="Skin in the Game">
+          <div class="book-card__info">
+            <div class="book-card__title">Skin in the Game</div>
+            <div class="book-card__author">by Nassim Nicholas Taleb</div>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780345350688-M.jpg" alt="The Autobiography of Malcolm X">
+          <div class="book-card__info">
+            <div class="book-card__title">The Autobiography of Malcolm X</div>
+            <div class="book-card__author">by Malcolm X & Alex Haley</div>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9781984881786-M.jpg" alt="The Key Man">
+          <div class="book-card__info">
+            <div class="book-card__title">The Key Man</div>
+            <div class="book-card__author">by Simon Clark & Will Louch</div>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780063221536-M.jpg" alt="Amphibious Soul">
+          <div class="book-card__info">
+            <div class="book-card__title">Amphibious Soul</div>
+            <div class="book-card__author">by Craig Foster</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    &copy; 2026 Akilesh Ramakrishna. All rights reserved.
+  </footer>
+</body>
+</html>
