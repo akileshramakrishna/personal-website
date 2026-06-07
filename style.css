@@ -323,6 +323,20 @@ img { max-width: 100%; height: auto; display: block; }
 
 .newsletter-form button:hover { opacity: 0.85; }
 
+.newsletter-thanks {
+  color: var(--color-text);
+  font-weight: 600;
+  padding: 0.5rem 0;
+}
+.newsletter-thanks span {
+  display: block;
+  color: var(--color-text-muted);
+  font-weight: 400;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+.newsletter-form button[disabled] { opacity: 0.6; cursor: default; }
+
 /* ── About ── */
 .about-section {
   padding: 4rem 0;

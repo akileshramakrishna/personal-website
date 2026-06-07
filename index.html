@@ -46,9 +46,11 @@
     <section class="newsletter-section">
       <div class="newsletter-box">
         <h2 class="newsletter-box__title">Stay in the loop</h2>
-        <p class="newsletter-box__desc">Occasional updates on new writing and photos. No spam, unsubscribe anytime.</p>
-        <form class="newsletter-form" action="https://YOUR_MAILCHIMP_URL" method="post" target="_blank">
-          <input type="email" name="EMAIL" placeholder="your@email.com" required>
+        <p class="newsletter-box__desc">Occasional updates on new writing, photos, or a book recommendation. Unsubscribe anytime.</p>
+        <form class="newsletter-form" action="https://assets.mailerlite.com/jsonp/2413271/forms/189576672859653472/subscribe" method="post" target="_blank">
+          <input type="email" name="fields[email]" placeholder="your@email.com" required>
+          <input type="hidden" name="ml-submit" value="1">
+          <input type="hidden" name="anticsrf" value="true">
           <button type="submit">Subscribe</button>
         </form>
       </div>
@@ -58,5 +60,22 @@
   <footer class="site-footer">
     &copy; 2026 Akilesh Ramakrishna. All rights reserved.
   </footer>
+
+  <script>
+    // Submit the MailerLite newsletter form in-page so visitors stay on the site.
+    document.querySelectorAll('.newsletter-form').forEach(function (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var btn = form.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Subscribing…'; }
+        fetch(form.action, {
+          method: 'POST',
+          body: new URLSearchParams(new FormData(form))
+        }).catch(function () {}).finally(function () {
+          form.innerHTML = '<p class="newsletter-thanks">Thanks for subscribing!<span>You\'re on the list — I\'ll be in touch.</span></p>';
+        });
+      });
+    });
+  </script>
 </body>
 </html>

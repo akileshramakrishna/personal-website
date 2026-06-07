@@ -36,20 +36,21 @@
         <p class="newsletter-box__desc">Join the list and get new posts delivered to your inbox.</p>
 
         <!--
-          MAILCHIMP INTEGRATION:
-          1. Log into Mailchimp → Audience → Signup forms → Embedded forms
-          2. Copy the form action URL (starts with https://XXXX.us##.list-manage.com/subscribe/post?u=...)
-          3. Replace YOUR_MAILCHIMP_URL below with that URL
-          4. The input name "EMAIL" is standard for Mailchimp
+          MAILERLITE INTEGRATION:
+          The form posts to MailerLite's subscribe endpoint. The email input must use
+          name="fields[email]", and the two hidden inputs (ml-submit, anticsrf) are
+          required by MailerLite. Styling is kept local via the newsletter-form class.
         -->
-        <form class="newsletter-form" action="https://YOUR_MAILCHIMP_URL" method="post" target="_blank">
-          <input type="email" name="EMAIL" placeholder="your@email.com" required>
+        <form class="newsletter-form" action="https://assets.mailerlite.com/jsonp/2413271/forms/189576672859653472/subscribe" method="post" target="_blank">
+          <input type="email" name="fields[email]" placeholder="your@email.com" required>
+          <input type="hidden" name="ml-submit" value="1">
+          <input type="hidden" name="anticsrf" value="true">
           <button type="submit">Subscribe</button>
         </form>
       </div>
 
       <p style="color: var(--color-text-muted); font-size: 0.8rem; margin-top: 1.5rem;">
-        Powered by Mailchimp. Your email will never be shared.
+        Powered by MailerLite. Your email will never be shared.
       </p>
     </section>
 
@@ -75,5 +76,22 @@
   <footer class="site-footer">
     &copy; 2026 Akilesh Ramakrishna. All rights reserved.
   </footer>
+
+  <script>
+    // Submit the MailerLite newsletter form in-page so visitors stay on the site.
+    document.querySelectorAll('.newsletter-form').forEach(function (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var btn = form.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Subscribing…'; }
+        fetch(form.action, {
+          method: 'POST',
+          body: new URLSearchParams(new FormData(form))
+        }).catch(function () {}).finally(function () {
+          form.innerHTML = '<p class="newsletter-thanks">Thanks for subscribing!<span>You\'re on the list — I\'ll be in touch.</span></p>';
+        });
+      });
+    });
+  </script>
 </body>
 </html>
