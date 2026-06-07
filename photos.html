@@ -5,91 +5,467 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Photos — Akilesh Ramakrishna</title>
   <meta name="description" content="Photography by Akilesh Ramakrishna.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ============================================================
+       PHOTOS — full-screen immersive photography.
+       Photos fill the entire viewport in one continuous horizontal
+       strip (full height, natural width). A see-through banner is
+       overlaid on the left holding all nav + controls. The first
+       photo is shifted clear of the banner so they tile the screen;
+       later photos pass behind the translucent banner as you scroll.
+       Add a photo via the PHOTOS array below: { title, tag, src }
+       tag = 'india' | 'world' | 'us'
+       ============================================================ */
+
+    :root {
+      --photo-bg: #0d0d0d;
+      --banner-w: 280px; /* recomputed by JS to tile with the first photo */
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: var(--font);
+      background: var(--photo-bg);
+      height: 100vh;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Full-screen photo stage ──────────────────────────── */
+    .pstage { position: fixed; inset: 0; z-index: 1; }
+
+    .scroller {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: stretch;
+      overflow-x: auto;
+      overflow-y: hidden;
+      cursor: grab;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      background: var(--photo-bg);
+    }
+    .scroller::-webkit-scrollbar { display: none; }
+    .scroller.is-dragging { cursor: grabbing; }
+    .scroller.is-dragging .slide { pointer-events: none; }
+
+    .slide { position: relative; flex: 0 0 auto; height: 100%; background: var(--photo-bg); }
+    /* First photo is pushed clear of the banner so they tile the screen
+       with no overlap; all later photos stay full-bleed and pass behind
+       the translucent banner as you scroll. */
+    .slide:first-child { margin-left: var(--banner-w); }
+    /* Photo fills full height; width follows its natural aspect ratio,
+       so the next photo sits flush against it — no background gap. */
+    .slide img {
+      height: 100%;
+      width: auto;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    /* Captions: hidden, revealed on hover OR while scrolling */
+    .slide__meta {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 5rem 1.75rem 1.5rem;
+      color: #fff;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+    .slide:hover .slide__meta,
+    .scroller.show-meta .slide__meta { opacity: 1; }
+    .slide__title { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; }
+    .slide__region {
+      font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+      opacity: 0.8; margin-top: 0.2rem;
+    }
+
+    /* ── Grid view ────────────────────────────────────────── */
+    .grid {
+      position: absolute;
+      inset: 0;
+      display: none;          /* -> flex when active (see view rules) */
+      flex-wrap: wrap;
+      align-items: flex-start; /* don't stretch shorter items in a row */
+      align-content: flex-start;
+      gap: 20px;
+      background: var(--photo-bg);
+      overflow-y: auto;
+      padding: 20px;
+      padding-left: calc(var(--banner-w) + 20px);
+      scrollbar-width: none;
+    }
+    .grid::-webkit-scrollbar { width: 0; }
+    /* Two per row; flex items can never overlap. */
+    .tile {
+      position: relative;
+      flex: 0 0 calc((100% - 20px) / 2);
+      max-width: calc((100% - 20px) / 2);
+      background: #000;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    /* Show the whole photo, uncropped, at its natural ratio. */
+    .tile img { display: block; width: 100%; height: auto; }
+    .tile__title {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 2.5rem 0.9rem 0.8rem;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .tile:hover .tile__title { opacity: 1; }
+
+    body[data-view="grid"] .scroller { display: none; }
+    body[data-view="grid"] .grid { display: flex; }
+
+    /* ── Left banner (overlay) ────────────────────────────── */
+    .vbanner {
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      width: var(--banner-w);
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      padding: 2.25rem 1.9rem;
+      color: #fff;
+      /* Significantly see-through: photos remain visible passing behind it. */
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.32));
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+    }
+    body[data-view="grid"] .vbanner {
+      background: #0a0a0a;
+      text-shadow: none;
+    }
+
+    .vb-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #fff;
+      text-decoration: none;
+    }
+    .vb-title:hover { opacity: 0.7; }
+
+    .vb-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-top: 2.25rem;
+    }
+    .vb-nav a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: rgba(255, 255, 255, 0.72);
+      text-decoration: none;
+      transition: color 0.15s;
+      width: max-content;
+    }
+    .vb-nav a:hover { color: #fff; }
+    .vb-nav a.is-active { color: #fff; font-weight: 700; }
+
+    .vb-controls { margin-top: auto; }
+
+    .vb-count {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 1rem;
+    }
+
+    .pfilters { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 1.1rem; }
+    .pill {
+      appearance: none;
+      background: transparent;
+      border: 0.5px solid rgba(255, 255, 255, 0.3);
+      color: rgba(255, 255, 255, 0.8);
+      font-family: var(--font);
+      font-size: 0.76rem;
+      letter-spacing: 0.01em;
+      padding: 0.28rem 0.7rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: color 0.15s, background 0.15s, border-color 0.15s;
+    }
+    .pill:hover { color: #fff; border-color: rgba(255, 255, 255, 0.55); }
+    .pill.is-active { color: #0d0d0d; background: #fff; border-color: #fff; text-shadow: none; }
+
+    .pviews { display: flex; gap: 0.3rem; }
+    .vtoggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px; height: 32px;
+      border: 0.5px solid rgba(255, 255, 255, 0.3);
+      border-radius: 6px;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.8);
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+    .vtoggle svg { width: 16px; height: 16px; display: block; }
+    .vtoggle:hover { color: #fff; border-color: rgba(255, 255, 255, 0.55); }
+    .vtoggle.is-active { color: #0d0d0d; background: #fff; border-color: #fff; }
+
+    /* Empty state */
+    .pempty {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding-left: var(--banner-w);
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.85rem;
+    }
+    body.is-empty .scroller,
+    body.is-empty .grid { display: none !important; }
+    body.is-empty .pempty { display: flex; }
+
+    @media (max-width: 700px) {
+      :root { --banner-w: 150px; }
+      .vbanner { padding: 1.5rem 1.1rem; }
+      .vb-title { font-size: 0.95rem; }
+      .vb-nav { margin-top: 1.5rem; gap: 0.4rem; }
+      .vb-nav a { font-size: 0.85rem; }
+      .pill { padding: 0.25rem 0.55rem; font-size: 0.7rem; }
+      .tile { flex: 0 0 100%; max-width: 100%; }
+    }
+  </style>
 </head>
-<body>
-  <nav class="site-nav">
-    <a href="index.html" class="site-nav__logo"><img src="meditation_logo.png" alt="Logo">Akilesh Ramakrishna</a>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.site-nav__links').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="site-nav__links">
-      <li><a href="writing.html">Writing</a></li>
-      <li><a href="photos.html" class="active">Photos</a></li>
-      <li><a href="books.html">Books</a></li>
-      <li><a href="newsletter.html">Newsletter</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-  </nav>
+<body data-view="scroll">
 
-  <main class="container--wide">
-    <section class="section-header" style="max-width: var(--max-width); margin: 0 auto;">
-      <h1 class="section-header__title">Photos</h1>
-      <p class="section-header__desc">Moments captured. Click any image to view it larger.</p>
-    </section>
-
-    <div class="photo-grid">
-      <div class="photo-grid__item" onclick="openLightbox(this)">
-        <img src="photo-01.jpg" alt="Mountain road, Himalayas" data-caption="Mountain road, Himalayas">
-      </div>
-      <div class="photo-grid__item" onclick="openLightbox(this)">
-        <img src="photo-07.jpg" alt="Pangong Lake, Ladakh" data-caption="Pangong Lake, Ladakh">
-      </div>
-      <div class="photo-grid__item" onclick="openLightbox(this)">
-        <img src="photo-03.jpg" alt="Tea plantations, Munnar" data-caption="Tea plantations, Munnar">
-      </div>
-      <div class="photo-grid__item" onclick="openLightbox(this)">
-        <img src="photo-04.jpg" alt="Jacaranda trees, tea hills" data-caption="Jacaranda trees, tea hills">
-      </div>
-      <div class="photo-grid__item" onclick="openLightbox(this)">
-        <img src="photo-06.jpg" alt="Flower fields, Turtuk valley" data-caption="Flower fields, Turtuk valley">
-      </div>
-      <div class="photo-grid__item" onclick="openLightbox(this)">
-        <img src="photo-02.jpg" alt="Peaks, Himalayan range" data-caption="Peaks, Himalayan range">
-      </div>
-      <div class="photo-grid__item" onclick="openLightbox(this)">
-        <img src="photo-05.jpg" alt="Cloud-wrapped summit, Karakoram" data-caption="Cloud-wrapped summit, Karakoram">
-      </div>
-      <div class="photo-grid__item" onclick="openLightbox(this)">
-        <img src="photo-08.jpg" alt="Pangong shore, Ladakh" data-caption="Pangong shore, Ladakh">
-      </div>
-      <div class="photo-grid__item" onclick="openLightbox(this)">
-        <img src="photo-09.jpg" alt="Dharamshala" data-caption="Dharamshala">
-      </div>
-    </div>
-  </main>
-
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <button class="lightbox__close" aria-label="Close">&times;</button>
-    <img id="lightbox-img" src="" alt="">
-    <div class="lightbox__caption" id="lightbox-caption"></div>
+  <!-- Full-screen photos -->
+  <div class="pstage">
+    <div class="scroller" id="scroller"></div>
+    <div class="grid" id="grid"></div>
+    <div class="pempty" id="empty">No photos here yet.</div>
   </div>
 
-  <footer class="site-footer">
-    &copy; 2026 Akilesh Ramakrishna. All rights reserved.
-  </footer>
+  <!-- Overlaid banner: nav + controls -->
+  <aside class="vbanner">
+    <a class="vb-title" href="index.html">Akilesh<br>Ramakrishna</a>
+
+    <nav class="vb-nav" aria-label="Site">
+      <a href="writing.html">Writing</a>
+      <a href="photos.html" class="is-active">Photos</a>
+      <a href="books.html">Books</a>
+      <a href="newsletter.html">Newsletter</a>
+      <a href="about.html">About</a>
+    </nav>
+
+    <div class="vb-controls">
+      <div class="vb-count" id="count">— photos</div>
+
+      <div class="pfilters" id="filters" aria-label="Filter photos">
+        <button class="pill is-active" data-tag="all">All</button>
+        <button class="pill" data-tag="india">India</button>
+        <button class="pill" data-tag="world">World</button>
+        <button class="pill" data-tag="us">US</button>
+      </div>
+
+      <div class="pviews">
+        <button class="vtoggle is-active" id="view-scroll" aria-label="Scroll view" title="Scroll view">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <rect x="2.5" y="6" width="8.5" height="12" rx="1"></rect>
+            <rect x="13" y="6" width="8.5" height="12" rx="1"></rect>
+          </svg>
+        </button>
+        <button class="vtoggle" id="view-grid" aria-label="Grid view" title="Grid view">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1"></rect>
+            <rect x="14" y="3.5" width="6.5" height="6.5" rx="1"></rect>
+            <rect x="3.5" y="14" width="6.5" height="6.5" rx="1"></rect>
+            <rect x="14" y="14" width="6.5" height="6.5" rx="1"></rect>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </aside>
 
   <script>
-    function openLightbox(el) {
-      const img = el.querySelector('img');
-      document.getElementById('lightbox-img').src = img.src;
-      document.getElementById('lightbox-img').alt = img.alt;
-      document.getElementById('lightbox-caption').textContent = img.dataset.caption || '';
-      document.getElementById('lightbox').classList.add('active');
-      document.body.style.overflow = 'hidden';
+    /* ============================================================
+       ADD PHOTOS HERE — one object per photo.
+       title : caption shown on hover / while scrolling
+       tag   : 'india' | 'world' | 'us'
+       src   : image path (relative to this file)
+       Mix portrait & landscape freely — each renders full-height
+       at its natural width, flush against its neighbours.
+       ============================================================ */
+    const PHOTOS = [
+      { title: 'Sleeping Buddha, India/Nepal',    tag: 'india', src: 'marquee.jpg' },
+      { title: 'Mountain road, Himalayas',        tag: 'india', src: 'photo-01.jpg' },
+      { title: 'Pangong Lake, Ladakh',            tag: 'india', src: 'photo-07.jpg' },
+      { title: 'Tea plantations, Munnar',         tag: 'india', src: 'photo-03.jpg' },
+      { title: 'Jacaranda trees, tea hills',      tag: 'india', src: 'photo-04.jpg' },
+      { title: 'Flower fields, Turtuk valley',    tag: 'india', src: 'photo-06.jpg' },
+      { title: 'Peaks, Himalayan range',          tag: 'india', src: 'photo-02.jpg' },
+      { title: 'Cloud-wrapped summit, Karakoram', tag: 'india', src: 'photo-05.jpg' },
+      { title: 'Pangong shore, Ladakh',           tag: 'india', src: 'photo-08.jpg' },
+      { title: 'Dharamshala',                     tag: 'india', src: 'photo-09.jpg' },
+    ];
+
+    const REGION_LABEL = { india: 'India', world: 'World', us: 'US' };
+
+    const scroller = document.getElementById('scroller');
+    const grid     = document.getElementById('grid');
+    const countEl  = document.getElementById('count');
+    const filters  = document.getElementById('filters');
+
+    let activeTag = 'all';
+    const visiblePhotos = () =>
+      activeTag === 'all' ? PHOTOS : PHOTOS.filter(p => p.tag === activeTag);
+
+    function render() {
+      const list = visiblePhotos();
+
+      scroller.innerHTML = list.map(p => `
+        <figure class="slide">
+          <img src="${p.src}" alt="${escapeAttr(p.title)}" draggable="false">
+          <figcaption class="slide__meta">
+            <div class="slide__title">${escapeHtml(p.title)}</div>
+            <div class="slide__region">${REGION_LABEL[p.tag] || ''}</div>
+          </figcaption>
+        </figure>`).join('');
+
+      grid.innerHTML = list.map(p => `
+        <figure class="tile">
+          <img src="${p.src}" alt="${escapeAttr(p.title)}">
+          <figcaption class="tile__title">${escapeHtml(p.title)}</figcaption>
+        </figure>`).join('');
+
+      const n = list.length;
+      const noun = n === 1 ? 'photo' : 'photos';
+      countEl.textContent = activeTag === 'all'
+        ? `${n} ${noun}`
+        : `${n} ${noun} · ${REGION_LABEL[activeTag]}`;
+
+      document.body.classList.toggle('is-empty', n === 0);
+      scroller.scrollLeft = 0;
+      grid.scrollTop = 0;
+
+      fitFirstPhoto();
     }
 
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('active');
-      document.body.style.overflow = '';
+    /* Size the banner so it + the first full-height photo tile the
+       screen width (no overlap), plus a small `extra` so the banner
+       reads a touch wider. Depends on the first photo's aspect ratio
+       and the current viewport, so it's computed live. */
+    function fitFirstPhoto() {
+      const img = scroller.querySelector('.slide img');
+      if (!img) return;
+      const apply = () => {
+        const ratio = img.naturalWidth / img.naturalHeight;
+        if (!ratio) return;
+        const stageH = scroller.clientHeight || window.innerHeight;
+        const photoW = stageH * ratio;
+        const extra = 56;                                  // a touch wider than a perfect tile
+        const scale = 1.2;                                 // 20% wider than the tiled width
+        const minW = 150;                                  // controls must fit
+        const maxW = Math.round(window.innerWidth * 0.46); // never dominate
+        const tiledW = (window.innerWidth - photoW) + extra;
+        const bannerW = Math.max(minW, Math.min(Math.round(tiledW * scale), maxW));
+        document.documentElement.style.setProperty('--banner-w', bannerW + 'px');
+      };
+      if (img.complete && img.naturalWidth) apply();
+      else img.addEventListener('load', apply, { once: true });
     }
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeLightbox();
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(fitFirstPhoto, 120);
     });
+
+    // ── Filters ──
+    filters.addEventListener('click', (e) => {
+      const btn = e.target.closest('.pill');
+      if (!btn) return;
+      activeTag = btn.dataset.tag;
+      filters.querySelectorAll('.pill').forEach(b => b.classList.toggle('is-active', b === btn));
+      render();
+    });
+
+    // ── View toggle ──
+    const btnScroll = document.getElementById('view-scroll');
+    const btnGrid   = document.getElementById('view-grid');
+    function setView(view) {
+      document.body.dataset.view = view;
+      btnScroll.classList.toggle('is-active', view === 'scroll');
+      btnGrid.classList.toggle('is-active', view === 'grid');
+    }
+    btnScroll.addEventListener('click', () => setView('scroll'));
+    btnGrid.addEventListener('click', () => setView('grid'));
+
+    // ── Click a grid thumbnail → open that photo in scroll mode ──
+    grid.addEventListener('click', (e) => {
+      const tile = e.target.closest('.tile');
+      if (!tile) return;
+      const index = Array.prototype.indexOf.call(grid.children, tile);
+      setView('scroll');
+      const slide = scroller.children[index];
+      if (!slide) return;
+      // Align the chosen photo's left edge to the banner's right edge.
+      const bw = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--banner-w')) || 0;
+      scroller.scrollLeft = Math.max(0, slide.offsetLeft - bw);
+    });
+
+    // ── Drag-to-scroll ──
+    let isDown = false, startX = 0, startScroll = 0;
+    scroller.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX;
+      startScroll = scroller.scrollLeft;
+      scroller.classList.add('is-dragging');
+    });
+    window.addEventListener('mouseup', () => {
+      if (!isDown) return;
+      isDown = false;
+      scroller.classList.remove('is-dragging');
+    });
+    scroller.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      scroller.scrollLeft = startScroll - (e.pageX - startX);
+    });
+    scroller.addEventListener('dragstart', (e) => e.preventDefault());
+
+    // ── Vertical wheel → horizontal scroll ──
+    scroller.addEventListener('wheel', (e) => {
+      if (document.body.dataset.view !== 'scroll') return;
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        scroller.scrollLeft += e.deltaY;
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    // ── Reveal captions while scrolling, hide shortly after ──
+    let metaTimer;
+    scroller.addEventListener('scroll', () => {
+      scroller.classList.add('show-meta');
+      clearTimeout(metaTimer);
+      metaTimer = setTimeout(() => scroller.classList.remove('show-meta'), 900);
+    }, { passive: true });
+
+    // ── Helpers ──
+    const escapeHtml = s => s.replace(/[&<>]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;' }[c]));
+    const escapeAttr = s => s.replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
+
+    render();
   </script>
 </body>
 </html>
