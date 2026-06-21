@@ -4,76 +4,99 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Akilesh Ramakrishna</title>
-  <meta name="description" content="Personal website of Akilesh Ramakrishna — writing, photography, books, and more.">
+  <meta name="description" content="Personal site of Akilesh Ramakrishna — writing, photography, and books.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav class="site-nav">
-    <a href="index.html" class="site-nav__logo"><img src="meditation_logo.png" alt="Logo">Akilesh Ramakrishna</a>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.site-nav__links').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="site-nav__links">
-      <li><a href="writing.html">Writing</a></li>
-      <li><a href="photos.html">Photos</a></li>
-      <li><a href="books.html">Books</a></li>
-      <li><a href="newsletter.html">Newsletter</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-  </nav>
 
-  <main class="container">
-    <section class="hero">
-      <h1 class="hero__title">Hello, I'm Akilesh.</h1>
-      <p class="hero__subtitle">
-        Welcome to my home page. I built this site to share what moves me in this world. You can find writing, photography from travels, and books I've loved to connect our individual experience with the universal.
-      </p>
-    </section>
+  <aside class="sidebar">
+    <a class="sidebar__name" href="index.html"><img class="sidebar__logo" src="sketch_transparent.png" alt="">Akilesh Ramakrishna</a>
+    <nav class="sidebar__nav">
+      <a href="writing.html">Writing</a>
+      <a href="photos.html">Photos</a>
+      <a href="books.html">Books</a>
+      <a href="newsletter.html">Newsletter</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="sidebar__bottom">
+      <div class="sidebar__label">— home</div>
+    </div>
+  </aside>
 
-    <section style="padding-bottom: 3rem;">
-      <h2 style="font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 1.5rem;">Recent Writing</h2>
-      <div class="card-list">
-        <a href="on-journaling.html" class="card">
-          <div class="card__date">May 2026</div>
-          <div class="card__title">On Journaling</div>
-          <div class="card__excerpt">The practical purpose of journaling is to capture the thoughts and emotions of our day. The ethical purpose to reflect on how the events have moved us and formed our thinking.</div>
-        </a>
+  <main class="main">
+    <div class="main__inner">
+
+      <!-- Intro -->
+      <p class="home-intro">Hello, I'm Akilesh. Welcome to my home page. I built this site to share what moves me in this world. You can find writing, photography from travels, and books I've loved to connect our individual experience with the universal.</p>
+
+      <!-- Recent writing -->
+      <div class="section-block">
+        <div class="section-label">Recent Writing</div>
+        <div id="recent"></div>
+        <a class="view-all" href="writing.html">View all writing →</a>
       </div>
-    </section>
 
-    <section class="newsletter-section">
-      <div class="newsletter-box">
-        <h2 class="newsletter-box__title">Stay in the loop</h2>
-        <p class="newsletter-box__desc">Occasional updates on new writing, photos, or a book recommendation. Unsubscribe anytime.</p>
-        <form class="newsletter-form" action="https://assets.mailerlite.com/jsonp/2413271/forms/189576672859653472/subscribe" method="post" target="_blank">
+      <!-- Newsletter signup -->
+      <div class="section-block">
+        <div class="section-label">Stay in the Loop</div>
+        <p class="lead" style="font-size:14px; margin-bottom:14px;">Occasional updates on new writing, photos, or a book recommendation. Unsubscribe anytime.</p>
+
+        <!-- ============================================================
+             MAILERLITE INTEGRATION (see newsletter.html for details).
+             Posts to MailerLite's subscribe endpoint; email field must be
+             name="fields[email]". Submits in-page via the script below.
+             ============================================================ -->
+        <form class="nl-form" action="https://assets.mailerlite.com/jsonp/2413271/forms/189576672859653472/subscribe" method="post" target="_blank">
           <input type="email" name="fields[email]" placeholder="your@email.com" required>
           <input type="hidden" name="ml-submit" value="1">
           <input type="hidden" name="anticsrf" value="true">
           <button type="submit">Subscribe</button>
         </form>
       </div>
-    </section>
+
+      <div class="footer">© 2026 Akilesh Ramakrishna. All rights reserved.</div>
+
+    </div>
   </main>
 
-  <footer class="site-footer">
-    &copy; 2026 Akilesh Ramakrishna. All rights reserved.
-  </footer>
-
   <script>
-    // Submit the MailerLite newsletter form in-page so visitors stay on the site.
-    document.querySelectorAll('.newsletter-form').forEach(function (form) {
+    /* Most recent articles (keep in sync with writing.html). */
+    const ARTICLES = [
+      { title: 'On Journaling', date: 'May 2026', cat: 'reflections', href: 'on-journaling.html',
+        excerpt: "The practical purpose of journaling is to capture the thoughts and emotions of our day. The ethical purpose to reflect on how the events have moved us and formed our thinking.", cover: null },
+      { title: 'Getting Started with Personal Websites', date: 'February 2026', cat: 'other', href: '#',
+        excerpt: "Why everyone should have their own little corner of the internet, and how to make it happen without overthinking it.", cover: null },
+    ];
+    const CAT_LABEL = { reflections: 'Reflections', photos: 'Photos', climate: 'Climate Finance', other: 'Other Posts' };
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
+
+    document.getElementById('recent').innerHTML = ARTICLES.slice(0, 3).map(a => `
+      <article class="article">
+        <div class="article__meta">
+          <div class="article__date">${esc(a.date)}</div>
+          <div class="article__cat">${esc(CAT_LABEL[a.cat] || '')}</div>
+        </div>
+        ${a.cover ? `<img class="article__thumb" src="${esc(a.cover)}" alt="">` : ''}
+        <div class="article__body">
+          <a class="article__title" href="${esc(a.href)}">${esc(a.title)}</a>
+          <div class="article__excerpt">${esc(a.excerpt)}</div>
+        </div>
+      </article>`).join('');
+
+    // In-page MailerLite submit
+    document.querySelectorAll('.nl-form').forEach(function (form) {
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var btn = form.querySelector('button[type="submit"]');
         if (btn) { btn.disabled = true; btn.textContent = 'Subscribing…'; }
-        fetch(form.action, {
-          method: 'POST',
-          body: new URLSearchParams(new FormData(form))
-        }).catch(function () {}).finally(function () {
-          form.innerHTML = '<p class="newsletter-thanks">Thanks for subscribing!<span>You\'re on the list — I\'ll be in touch.</span></p>';
-        });
+        fetch(form.action, { method: 'POST', body: new URLSearchParams(new FormData(form)) })
+          .catch(function () {})
+          .finally(function () {
+            form.outerHTML = '<p class="nl-thanks">Thanks for subscribing!<span>You\'re on the list — I\'ll be in touch.</span></p>';
+          });
       });
     });
   </script>

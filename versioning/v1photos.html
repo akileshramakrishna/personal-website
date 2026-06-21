@@ -19,7 +19,7 @@
 
     :root {
       --photo-bg: #0d0d0d;
-      --banner-w: 178px; /* fixed — consistent with the rest of the site */
+      --banner-w: 280px; /* recomputed by JS to tile with the first photo */
       --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
@@ -130,7 +130,7 @@
     body[data-view="grid"] .scroller { display: none; }
     body[data-view="grid"] .grid { display: flex; }
 
-    /* ── Left sidebar (light — matches the rest of the site) ── */
+    /* ── Left banner (overlay) ────────────────────────────── */
     .vbanner {
       position: fixed;
       top: 0; left: 0; bottom: 0;
@@ -138,96 +138,88 @@
       z-index: 30;
       display: flex;
       flex-direction: column;
-      padding: 34px 26px;
-      color: #241c12;
-      /* Translucent frosted panel — photos show through softly as they scroll behind it. */
-      background: rgba(240, 231, 216, 0.72);
-      -webkit-backdrop-filter: blur(14px) saturate(1.1);
-      backdrop-filter: blur(14px) saturate(1.1);
-      border-right: 0.5px solid rgba(36, 28, 18, 0.1);
+      padding: 2.25rem 1.9rem;
+      color: #fff;
+      /* Significantly see-through: photos remain visible passing behind it. */
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.32));
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+    }
+    body[data-view="grid"] .vbanner {
+      background: #0a0a0a;
+      text-shadow: none;
     }
 
-    .vb-logo { display: block; height: 60px; width: auto; margin-bottom: 14px; }
     .vb-title {
-      font-family: var(--font);
-      font-size: 18px;
-      font-weight: 600;
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-      color: #241c12;
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #fff;
       text-decoration: none;
     }
-    .vb-title:hover { color: rgba(36, 28, 18, 0.55); }
+    .vb-title:hover { opacity: 0.7; }
 
     .vb-nav {
       display: flex;
       flex-direction: column;
-      gap: 11px;
-      margin-top: 30px;
+      gap: 0.55rem;
+      margin-top: 2.25rem;
     }
     .vb-nav a {
-      font-family: var(--font);
-      font-size: 15px;
-      font-weight: 400;
+      font-size: 0.95rem;
+      font-weight: 500;
       letter-spacing: -0.01em;
-      color: rgba(36, 28, 18, 0.4);
+      color: rgba(255, 255, 255, 0.72);
       text-decoration: none;
       transition: color 0.15s;
       width: max-content;
     }
-    .vb-nav a:hover { color: #241c12; }
-    .vb-nav a.is-active { color: #241c12; font-weight: 500; }
+    .vb-nav a:hover { color: #fff; }
+    .vb-nav a.is-active { color: #fff; font-weight: 700; }
 
     .vb-controls { margin-top: auto; }
 
     .vb-count {
-      font-family: var(--font);
-      font-size: 10px;
-      letter-spacing: 0.08em;
+      font-size: 11px;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: rgba(36, 28, 18, 0.3);
-      margin-bottom: 14px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 1rem;
     }
 
-    .pfilters {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin-bottom: 14px;
-    }
+    .pfilters { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 1.1rem; }
     .pill {
       appearance: none;
       background: transparent;
-      border: 0.5px solid rgba(36, 28, 18, 0.15);
-      color: rgba(36, 28, 18, 0.6);
+      border: 0.5px solid rgba(255, 255, 255, 0.3);
+      color: rgba(255, 255, 255, 0.8);
       font-family: var(--font);
-      font-size: 12px;
+      font-size: 0.76rem;
       letter-spacing: 0.01em;
-      padding: 7px 0;
-      text-align: center;
+      padding: 0.28rem 0.7rem;
       border-radius: 999px;
       cursor: pointer;
       transition: color 0.15s, background 0.15s, border-color 0.15s;
     }
-    .pill:hover { color: #241c12; border-color: rgba(36, 28, 18, 0.35); }
-    .pill.is-active { color: #f0e7d8; background: #241c12; border-color: #241c12; }
+    .pill:hover { color: #fff; border-color: rgba(255, 255, 255, 0.55); }
+    .pill.is-active { color: #0d0d0d; background: #fff; border-color: #fff; text-shadow: none; }
 
-    .pviews { display: flex; gap: 8px; }
+    .pviews { display: flex; gap: 0.3rem; }
     .vtoggle {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 34px; height: 34px;
-      border: 0.5px solid rgba(36, 28, 18, 0.15);
+      width: 32px; height: 32px;
+      border: 0.5px solid rgba(255, 255, 255, 0.3);
       border-radius: 6px;
       background: transparent;
-      color: #241c12;
+      color: rgba(255, 255, 255, 0.8);
       cursor: pointer;
       transition: color 0.15s, border-color 0.15s, background 0.15s;
     }
     .vtoggle svg { width: 16px; height: 16px; display: block; }
-    .vtoggle:hover { border-color: rgba(36, 28, 18, 0.35); }
-    .vtoggle.is-active { color: #f0e7d8; background: #241c12; border-color: #241c12; }
+    .vtoggle:hover { color: #fff; border-color: rgba(255, 255, 255, 0.55); }
+    .vtoggle.is-active { color: #0d0d0d; background: #fff; border-color: #fff; }
 
     /* Empty state */
     .pempty {
@@ -266,7 +258,7 @@
 
   <!-- Overlaid banner: nav + controls -->
   <aside class="vbanner">
-    <a class="vb-title" href="index.html"><img class="vb-logo" src="sketch_transparent.png" alt="">Akilesh<br>Ramakrishna</a>
+    <a class="vb-title" href="index.html">Akilesh<br>Ramakrishna</a>
 
     <nav class="vb-nav" aria-label="Site">
       <a href="writing.html">Writing</a>
@@ -365,7 +357,39 @@
       document.body.classList.toggle('is-empty', n === 0);
       scroller.scrollLeft = 0;
       grid.scrollTop = 0;
+
+      fitFirstPhoto();
     }
+
+    /* Size the banner so it + the first full-height photo tile the
+       screen width (no overlap), plus a small `extra` so the banner
+       reads a touch wider. Depends on the first photo's aspect ratio
+       and the current viewport, so it's computed live. */
+    function fitFirstPhoto() {
+      const img = scroller.querySelector('.slide img');
+      if (!img) return;
+      const apply = () => {
+        const ratio = img.naturalWidth / img.naturalHeight;
+        if (!ratio) return;
+        const stageH = scroller.clientHeight || window.innerHeight;
+        const photoW = stageH * ratio;
+        const extra = 56;                                  // a touch wider than a perfect tile
+        const scale = 1.2;                                 // 20% wider than the tiled width
+        const minW = 150;                                  // controls must fit
+        const maxW = Math.round(window.innerWidth * 0.46); // never dominate
+        const tiledW = (window.innerWidth - photoW) + extra;
+        const bannerW = Math.max(minW, Math.min(Math.round(tiledW * scale), maxW));
+        document.documentElement.style.setProperty('--banner-w', bannerW + 'px');
+      };
+      if (img.complete && img.naturalWidth) apply();
+      else img.addEventListener('load', apply, { once: true });
+    }
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(fitFirstPhoto, 120);
+    });
 
     // ── Filters ──
     filters.addEventListener('click', (e) => {

@@ -4,49 +4,99 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Writing — Akilesh Ramakrishna</title>
-  <meta name="description" content="Blog posts and essays by Akilesh Ramakrishna.">
+  <meta name="description" content="Essays and reflections by Akilesh Ramakrishna.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav class="site-nav">
-    <a href="index.html" class="site-nav__logo"><img src="meditation_logo.png" alt="Logo">Akilesh Ramakrishna</a>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.site-nav__links').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="site-nav__links">
-      <li><a href="writing.html" class="active">Writing</a></li>
-      <li><a href="photos.html">Photos</a></li>
-      <li><a href="books.html">Books</a></li>
-      <li><a href="newsletter.html">Newsletter</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-  </nav>
 
-  <main class="container">
-    <section class="section-header">
-      <h1 class="section-header__title">Writing</h1>
-      <p class="section-header__desc">Essays, reflections, and things I've been thinking about.</p>
-    </section>
-
-    <div class="card-list">
-      <a href="on-journaling.html" class="card">
-        <div class="card__date">May 2026</div>
-        <div class="card__title">On Journaling</div>
-        <div class="card__excerpt">The practical purpose of journaling is to capture the thoughts and emotions of our day. The ethical purpose to reflect on how the events have moved us and formed our thinking.</div>
-      </a>
-
-      <a href="#" class="card">
-        <div class="card__date">February 2026</div>
-        <div class="card__title">Getting Started with Personal Websites</div>
-        <div class="card__excerpt">Why everyone should have their own little corner of the internet, and how to make it happen without overthinking it.</div>
-      </a>
+  <aside class="sidebar">
+    <a class="sidebar__name" href="index.html"><img class="sidebar__logo" src="sketch_transparent.png" alt="">Akilesh Ramakrishna</a>
+    <nav class="sidebar__nav">
+      <a href="writing.html" class="active">Writing</a>
+      <a href="photos.html">Photos</a>
+      <a href="books.html">Books</a>
+      <a href="newsletter.html">Newsletter</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="sidebar__bottom">
+      <div class="sidebar__label">— writing</div>
+      <div class="sidebar__filters" id="filters">
+        <button class="filter-link active" data-cat="all">All</button>
+        <button class="filter-link" data-cat="reflections">Reflections</button>
+        <button class="filter-link" data-cat="photos">Photos</button>
+        <button class="filter-link" data-cat="climate">Climate Finance</button>
+        <button class="filter-link" data-cat="other">Other Posts</button>
+      </div>
     </div>
+  </aside>
+
+  <main class="main">
+    <div class="main__inner" id="articles"></div>
   </main>
 
-  <footer class="site-footer">
-    &copy; 2026 Akilesh Ramakrishna. All rights reserved.
-  </footer>
+  <script>
+    /* ============================================================
+       ADD ARTICLES HERE — newest first.
+       cat: 'reflections' | 'photos' | 'climate' | 'other'
+       cover: optional image path (shows a 72x48 thumbnail)
+       ============================================================ */
+    const ARTICLES = [
+      {
+        title: 'On Journaling',
+        date: 'May 2026', year: 2026, cat: 'reflections',
+        href: 'on-journaling.html',
+        excerpt: "The practical purpose of journaling is to capture the thoughts and emotions of our day. The ethical purpose to reflect on how the events have moved us and formed our thinking.",
+        cover: null
+      },
+      {
+        title: 'Getting Started with Personal Websites',
+        date: 'February 2026', year: 2026, cat: 'other',
+        href: '#',
+        excerpt: "Why everyone should have their own little corner of the internet, and how to make it happen without overthinking it.",
+        cover: null
+      },
+    ];
+
+    const CAT_LABEL = { reflections: 'Reflections', photos: 'Photos', climate: 'Climate Finance', other: 'Other Posts' };
+
+    const wrap = document.getElementById('articles');
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
+
+    function render() {
+      const years = [...new Set(ARTICLES.map(a => a.year))].sort((a, b) => b - a);
+      wrap.innerHTML = years.map(year => {
+        const rows = ARTICLES.filter(a => a.year === year).map(a => `
+          <article class="article" data-cat="${a.cat}">
+            <div class="article__meta">
+              <div class="article__date">${esc(a.date)}</div>
+              <div class="article__cat">${esc(CAT_LABEL[a.cat] || '')}</div>
+            </div>
+            ${a.cover ? `<img class="article__thumb" src="${esc(a.cover)}" alt="">` : ''}
+            <div class="article__body">
+              <a class="article__title" href="${esc(a.href)}">${esc(a.title)}</a>
+              <div class="article__excerpt">${esc(a.excerpt)}</div>
+            </div>
+          </article>`).join('');
+        return `<div class="year-divider">${year}</div>${rows}`;
+      }).join('');
+    }
+
+    // ── Filters (year labels always remain visible) ──
+    const filters = document.getElementById('filters');
+    filters.addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-link');
+      if (!btn) return;
+      const cat = btn.dataset.cat;
+      filters.querySelectorAll('.filter-link').forEach(b => b.classList.toggle('active', b === btn));
+      wrap.querySelectorAll('.article').forEach(row => {
+        row.style.display = (cat === 'all' || row.dataset.cat === cat) ? '' : 'none';
+      });
+    });
+
+    render();
+  </script>
 </body>
 </html>

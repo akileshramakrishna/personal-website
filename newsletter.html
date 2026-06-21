@@ -6,90 +6,90 @@
   <title>Newsletter — Akilesh Ramakrishna</title>
   <meta name="description" content="Subscribe to updates from Akilesh Ramakrishna.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav class="site-nav">
-    <a href="index.html" class="site-nav__logo"><img src="meditation_logo.png" alt="Logo">Akilesh Ramakrishna</a>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.site-nav__links').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="site-nav__links">
-      <li><a href="writing.html">Writing</a></li>
-      <li><a href="photos.html">Photos</a></li>
-      <li><a href="books.html">Books</a></li>
-      <li><a href="newsletter.html" class="active">Newsletter</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-  </nav>
 
-  <main class="container">
-    <section style="padding: 6rem 0; text-align: center;">
-      <h1 style="font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem;">Newsletter</h1>
-      <p style="color: var(--color-text-muted); max-width: 460px; margin: 0 auto 2.5rem; line-height: 1.7;">
-        I send occasional emails when I publish something new — a blog post, a photo series, or a book recommendation. Unsubscribe anytime.
-      </p>
+  <aside class="sidebar">
+    <a class="sidebar__name" href="index.html"><img class="sidebar__logo" src="sketch_transparent.png" alt="">Akilesh Ramakrishna</a>
+    <nav class="sidebar__nav">
+      <a href="writing.html">Writing</a>
+      <a href="photos.html">Photos</a>
+      <a href="books.html">Books</a>
+      <a href="newsletter.html" class="active">Newsletter</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="sidebar__bottom">
+      <div class="sidebar__label">— newsletter</div>
+    </div>
+  </aside>
 
-      <div class="newsletter-box" style="text-align: left;">
-        <h2 class="newsletter-box__title">Subscribe</h2>
-        <p class="newsletter-box__desc">Join the list and get new posts delivered to your inbox.</p>
+  <main class="main">
+    <div class="main__inner">
 
-        <!--
-          MAILERLITE INTEGRATION:
-          The form posts to MailerLite's subscribe endpoint. The email input must use
-          name="fields[email]", and the two hidden inputs (ml-submit, anticsrf) are
-          required by MailerLite. Styling is kept local via the newsletter-form class.
-        -->
-        <form class="newsletter-form" action="https://assets.mailerlite.com/jsonp/2413271/forms/189576672859653472/subscribe" method="post" target="_blank">
+      <p class="lead">I send occasional emails when I publish something new — a blog post, a photo series, or a book recommendation. Unsubscribe anytime.</p>
+
+      <div class="section-block">
+        <div class="section-label">Subscribe</div>
+        <p class="nl-sub">Join the list and get new posts delivered to your inbox.</p>
+
+        <!-- ============================================================
+             MAILERLITE INTEGRATION
+             The form posts to MailerLite's subscribe endpoint. The email
+             input must be name="fields[email]"; the two hidden inputs
+             (ml-submit, anticsrf) are required by MailerLite. Styling is
+             local. To swap in a different MailerLite form, replace the
+             form `action` URL (the account + form id) below.
+             The script at the bottom submits in-page (no redirect) and
+             shows a thank-you message on success.
+             ============================================================ -->
+        <form class="nl-form" id="nlForm"
+              action="https://assets.mailerlite.com/jsonp/2413271/forms/189576672859653472/subscribe"
+              method="post" target="_blank">
           <input type="email" name="fields[email]" placeholder="your@email.com" required>
           <input type="hidden" name="ml-submit" value="1">
           <input type="hidden" name="anticsrf" value="true">
           <button type="submit">Subscribe</button>
         </form>
+
+        <p class="nl-fine">Powered by MailerLite. Your email will never be shared.</p>
       </div>
 
-      <p style="color: var(--color-text-muted); font-size: 0.8rem; margin-top: 1.5rem;">
-        Powered by MailerLite. Your email will never be shared.
-      </p>
-    </section>
-
-    <section style="padding-bottom: 4rem;">
-      <h2 style="font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 1.5rem;">What to Expect</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
-        <div>
-          <p style="font-weight: 600; margin-bottom: 0.3rem;">New writing</p>
-          <p style="font-size: 0.9rem; color: var(--color-text-muted);">Essays and reflections as they're published.</p>
-        </div>
-        <div>
-          <p style="font-weight: 600; margin-bottom: 0.3rem;">Photo updates</p>
-          <p style="font-size: 0.9rem; color: var(--color-text-muted);">New photo series and behind-the-scenes notes.</p>
-        </div>
-        <div>
-          <p style="font-weight: 600; margin-bottom: 0.3rem;">Book picks</p>
-          <p style="font-size: 0.9rem; color: var(--color-text-muted);">Occasional reading recommendations worth your time.</p>
+      <div class="section-block">
+        <div class="section-label">What to Expect</div>
+        <div class="card-3">
+          <div class="info-card">
+            <div class="info-card__title">New writing</div>
+            <div class="info-card__desc">Essays and reflections as they're published.</div>
+          </div>
+          <div class="info-card">
+            <div class="info-card__title">Photo updates</div>
+            <div class="info-card__desc">New photo series and behind-the-scenes notes.</div>
+          </div>
+          <div class="info-card">
+            <div class="info-card__title">Book picks</div>
+            <div class="info-card__desc">Occasional reading recommendations worth your time.</div>
+          </div>
         </div>
       </div>
-    </section>
+
+    </div>
   </main>
 
-  <footer class="site-footer">
-    &copy; 2026 Akilesh Ramakrishna. All rights reserved.
-  </footer>
-
   <script>
-    // Submit the MailerLite newsletter form in-page so visitors stay on the site.
-    document.querySelectorAll('.newsletter-form').forEach(function (form) {
+    // Submit the MailerLite form in-page so visitors stay on the site.
+    document.querySelectorAll('.nl-form').forEach(function (form) {
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var btn = form.querySelector('button[type="submit"]');
         if (btn) { btn.disabled = true; btn.textContent = 'Subscribing…'; }
-        fetch(form.action, {
-          method: 'POST',
-          body: new URLSearchParams(new FormData(form))
-        }).catch(function () {}).finally(function () {
-          form.innerHTML = '<p class="newsletter-thanks">Thanks for subscribing!<span>You\'re on the list — I\'ll be in touch.</span></p>';
-        });
+        fetch(form.action, { method: 'POST', body: new URLSearchParams(new FormData(form)) })
+          .catch(function () {})
+          .finally(function () {
+            form.outerHTML = '<p class="nl-thanks">Thanks for subscribing!<span>You\'re on the list — I\'ll be in touch.</span></p>';
+          });
       });
     });
   </script>

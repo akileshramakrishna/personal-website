@@ -6,289 +6,164 @@
   <title>Books — Akilesh Ramakrishna</title>
   <meta name="description" content="Books and reading recommendations by Akilesh Ramakrishna.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .year-section { margin-bottom: 3rem; }
-    .category-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--color-text-muted);
-      margin: 1.5rem 0 0.8rem;
-    }
-    .favorites-banner {
-      background: var(--color-card-bg);
-      border: 1px solid var(--color-border);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .favorites-banner__label {
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--color-text-muted);
-      margin-bottom: 0.8rem;
-    }
-    .book-card__cover {
-      width: 80px;
-      height: 120px;
-      border-radius: 4px;
-      flex-shrink: 0;
-      object-fit: cover;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav class="site-nav">
-    <a href="index.html" class="site-nav__logo"><img src="meditation_logo.png" alt="Logo">Akilesh Ramakrishna</a>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.site-nav__links').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="site-nav__links">
-      <li><a href="writing.html">Writing</a></li>
-      <li><a href="photos.html">Photos</a></li>
-      <li><a href="books.html" class="active">Books</a></li>
-      <li><a href="newsletter.html">Newsletter</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-  </nav>
 
-  <main class="container">
-    <section class="section-header">
-      <h1 class="section-header__title">Books</h1>
-      <p class="section-header__desc">What I've been reading, with occasional notes on why it mattered.</p>
-    </section>
-
-    <!-- Currently Reading -->
-    <div class="year-section">
-      <h2 style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 1rem; padding-top: 1rem;">Currently Reading</h2>
-
-      <div class="category-label">Fiction</div>
-      <div style="border-top: 1px solid var(--color-border);">
-        <div class="book-card">
-          <img class="book-card__cover" src="https://ia903203.us.archive.org/view_archive.php?archive=/7/items/covers_0010/covers_0010_95.zip&file=0010954609.jpg" alt="Gora">
-          <div class="book-card__info">
-            <div class="book-card__title">Gora</div>
-            <div class="book-card__author">by Rabindranath Tagore</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="category-label">Non-Fiction</div>
-      <div style="border-top: 1px solid var(--color-border);">
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780143127130-M.jpg" alt="Thanks for the Feedback">
-          <div class="book-card__info">
-            <div class="book-card__title">Thanks for the Feedback</div>
-            <div class="book-card__author">by Douglas Stone & Sheila Heen</div>
-          </div>
-        </div>
+  <aside class="sidebar">
+    <a class="sidebar__name" href="index.html"><img class="sidebar__logo" src="sketch_transparent.png" alt="">Akilesh Ramakrishna</a>
+    <nav class="sidebar__nav">
+      <a href="writing.html">Writing</a>
+      <a href="photos.html">Photos</a>
+      <a href="books.html" class="active">Books</a>
+      <a href="newsletter.html">Newsletter</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="sidebar__bottom">
+      <div class="sidebar__label">— books</div>
+      <div class="sidebar__filters" id="filters">
+        <button class="filter-link active" data-genre="all">All</button>
+        <button class="filter-link" data-genre="fiction">Fiction</button>
+        <button class="filter-link" data-genre="nonfiction">Non-fiction</button>
       </div>
     </div>
+  </aside>
 
-    <!-- 2026 -->
-    <div class="year-section">
-      <h2 style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 1rem;">2026</h2>
-
-      <div class="category-label">Fiction</div>
-      <div style="border-top: 1px solid var(--color-border);">
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780241399002-M.jpg" alt="When We Cease to Understand the World">
-          <div class="book-card__info">
-            <div class="book-card__title">When We Cease to Understand the World</div>
-            <div class="book-card__author">by Benjamín Labatut</div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780375701870-M.jpg" alt="Go Tell It on the Mountain">
-          <div class="book-card__info">
-            <div class="book-card__title">Go Tell It on the Mountain</div>
-            <div class="book-card__author">by James Baldwin</div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <div class="book-card__cover" style="background:var(--color-border);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--color-text-muted);">Cover</div>
-          <div class="book-card__info">
-            <div class="book-card__title">Flesh</div>
-            <div class="book-card__author">by David Szalay</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="category-label">Non-Fiction</div>
-      <div style="border-top: 1px solid var(--color-border);">
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9781250262288-M.jpg" alt="Wanting">
-          <div class="book-card__info">
-            <div class="book-card__title">Wanting</div>
-            <div class="book-card__author">by Luke Burgis</div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780143106241-M.jpg" alt="The Snow Leopard">
-          <div class="book-card__info">
-            <div class="book-card__title">The Snow Leopard</div>
-            <div class="book-card__author">by Peter Matthiessen</div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780143036418-M.jpg" alt="The Tree Where Man Was Born">
-          <div class="book-card__info">
-            <div class="book-card__title">The Tree Where Man Was Born</div>
-            <div class="book-card__author">by Peter Matthiessen</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2025 -->
-    <div class="year-section">
-      <h2 style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 1rem;">2025</h2>
-
-      <div class="favorites-banner">
-        <div class="favorites-banner__label">Year's Favorites</div>
-        <div style="display: flex; gap: 2.5rem; flex-wrap: wrap;">
-          <div style="display: flex; gap: 1rem; align-items: flex-start;">
-            <img src="https://covers.openlibrary.org/b/isbn/9780060850524-M.jpg" alt="Brave New World" style="width: 70px; height: 105px; object-fit: cover; border-radius: 4px;">
-            <div>
-              <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); margin-bottom: 0.3rem;">Fiction</div>
-              <div style="font-weight: 600;">Brave New World</div>
-              <div style="font-size: 0.85rem; color: var(--color-text-muted);">by Aldous Huxley</div>
-            </div>
-          </div>
-          <div style="display: flex; gap: 1rem; align-items: flex-start;">
-            <img src="https://covers.openlibrary.org/b/isbn/9780593544853-M.jpg" alt="Marginlands" style="width: 70px; height: 105px; object-fit: cover; border-radius: 4px;">
-            <div>
-              <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); margin-bottom: 0.3rem;">Non-Fiction</div>
-              <div style="font-weight: 600;">Marginlands</div>
-              <div style="font-size: 0.85rem; color: var(--color-text-muted);">by Arati Kumar-Rao</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="category-label">Fiction</div>
-      <div style="border-top: 1px solid var(--color-border);">
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780156028356-M.jpg" alt="Life of Pi">
-          <div class="book-card__info">
-            <div class="book-card__title">Life of Pi</div>
-            <div class="book-card__author">by Yann Martel</div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780553275544-M.jpg" alt="Narcissus and Goldmund">
-          <div class="book-card__info">
-            <div class="book-card__title">Narcissus and Goldmund</div>
-            <div class="book-card__author">by Hermann Hesse</div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780316300131-M.jpg" alt="Ministry for the Future">
-          <div class="book-card__info">
-            <div class="book-card__title">Ministry for the Future</div>
-            <div class="book-card__author">by Kim Stanley Robinson</div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <div class="book-card__cover" style="background:var(--color-border);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--color-text-muted);">Cover</div>
-          <div class="book-card__info">
-            <div class="book-card__title">Loneliness of Sonia and Sunny</div>
-            <div class="book-card__author">by Kiran Desai</div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780140115369-M.jpg" alt="The Storyteller">
-          <div class="book-card__info">
-            <div class="book-card__title">Storyteller</div>
-            <div class="book-card__author">by Mario Vargas Llosa</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="category-label">Non-Fiction</div>
-      <div style="border-top: 1px solid var(--color-border);">
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780593544662-M.jpg" alt="Slow Productivity">
-          <div class="book-card__info">
-            <div class="book-card__title">Slow Productivity</div>
-            <div class="book-card__author">by Cal Newport</div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780062316097-M.jpg" alt="Sapiens">
-          <div class="book-card__info">
-            <div class="book-card__title">Sapiens</div>
-            <div class="book-card__author">by Yuval Noah Harari</div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780374533557-M.jpg" alt="Thinking, Fast and Slow">
-          <div class="book-card__info">
-            <div class="book-card__title">Thinking, Fast and Slow</div>
-            <div class="book-card__author">by Daniel Kahneman</div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780812988406-M.jpg" alt="When Breath Becomes Air">
-          <div class="book-card__info">
-            <div class="book-card__title">When Breath Becomes Air</div>
-            <div class="book-card__author">by Paul Kalanithi</div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780425284629-M.jpg" alt="Skin in the Game">
-          <div class="book-card__info">
-            <div class="book-card__title">Skin in the Game</div>
-            <div class="book-card__author">by Nassim Nicholas Taleb</div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/3491961300.jpg" alt="The Autobiography of Malcolm X">
-          <div class="book-card__info">
-            <div class="book-card__title">The Autobiography of Malcolm X</div>
-            <div class="book-card__author">by Malcolm X & Alex Haley</div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9781984881786-M.jpg" alt="The Key Man">
-          <div class="book-card__info">
-            <div class="book-card__title">The Key Man</div>
-            <div class="book-card__author">by Simon Clark & Will Louch</div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <img class="book-card__cover" src="https://covers.openlibrary.org/b/isbn/9780063221536-M.jpg" alt="Amphibious Soul">
-          <div class="book-card__info">
-            <div class="book-card__title">Amphibious Soul</div>
-            <div class="book-card__author">by Craig Foster</div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <main class="main">
+    <div class="main__inner" id="content"></div>
   </main>
 
-  <footer class="site-footer">
-    &copy; 2026 Akilesh Ramakrishna. All rights reserved.
-  </footer>
+  <script>
+    /* ============================================================
+       ADD BOOKS HERE.
+       genre   : 'fiction' | 'nonfiction'
+       section : 'reading'  (currently reading)  OR  a year number
+       isbn    : Open Library cover lookup (-M.jpg). Omit if none.
+       cover   : optional full URL override (used instead of isbn)
+       fav     : true for a year's favourite (shows a small dot)
+       ============================================================ */
+    const BOOKS = [
+      // Currently reading
+      { title: 'Gora', author: 'Rabindranath Tagore', genre: 'fiction', section: 'reading', cover: 'https://ia903203.us.archive.org/view_archive.php?archive=/7/items/covers_0010/covers_0010_95.zip&file=0010954609.jpg' },
+      { title: 'Models of the Mind', author: 'Grace Lindsay', genre: 'nonfiction', section: 'reading', isbn: '9781472966421' },
+
+      // 2026
+      { title: 'When We Cease to Understand the World', author: 'Benjamín Labatut', genre: 'fiction', section: 2026, cover: 'covers/labatut.jpg' },
+      { title: 'Go Tell It on the Mountain', author: 'James Baldwin', genre: 'fiction', section: 2026, isbn: '9780375701870' },
+      { title: 'Flesh', author: 'David Szalay', genre: 'fiction', section: 2026, cover: 'covers/szalay.jpg' },
+      { title: 'The Hungry Tide', author: 'Amitav Ghosh', genre: 'fiction', section: 2026, isbn: '9780618711666' },
+      { title: 'Wanting', author: 'Luke Burgis', genre: 'nonfiction', section: 2026, cover: 'covers/burgis.jpg' },
+      { title: 'The Snow Leopard', author: 'Peter Matthiessen', genre: 'nonfiction', section: 2026, cover: 'covers/snow-leopard.jpg' },
+      { title: 'The Tree Where Man Was Born', author: 'Peter Matthiessen', genre: 'nonfiction', section: 2026, cover: 'covers/tree-man-born.jpg' },
+      { title: 'The End of Average', author: 'Todd Rose', genre: 'nonfiction', section: 2026, isbn: '9780062358363' },
+
+      // 2025
+      { title: 'Brave New World', author: 'Aldous Huxley', genre: 'fiction', section: 2025, isbn: '9780060850524', fav: true },
+      { title: 'Life of Pi', author: 'Yann Martel', genre: 'fiction', section: 2025, cover: 'covers/martel.jpg' },
+      { title: 'Narcissus and Goldmund', author: 'Hermann Hesse', genre: 'fiction', section: 2025, cover: 'covers/hesse.jpg' },
+      { title: 'Ministry for the Future', author: 'Kim Stanley Robinson', genre: 'fiction', section: 2025, isbn: '9780316300131' },
+      { title: 'Loneliness of Sonia and Sunny', author: 'Kiran Desai', genre: 'fiction', section: 2025, cover: 'covers/desai.jpg' },
+      { title: 'Storyteller', author: 'Mario Vargas Llosa', genre: 'fiction', section: 2025, cover: 'covers/llosa.jpg' },
+      { title: 'Marginlands', author: 'Arati Kumar-Rao', genre: 'nonfiction', section: 2025, cover: 'covers/rao.jpg', fav: true },
+      { title: 'Slow Productivity', author: 'Cal Newport', genre: 'nonfiction', section: 2025, cover: 'covers/newport.jpg' },
+      { title: 'Sapiens', author: 'Yuval Noah Harari', genre: 'nonfiction', section: 2025, isbn: '9780062316097' },
+      { title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', genre: 'nonfiction', section: 2025, isbn: '9780374533557' },
+      { title: 'When Breath Becomes Air', author: 'Paul Kalanithi', genre: 'nonfiction', section: 2025, isbn: '9780812988406' },
+      { title: 'Skin in the Game', author: 'Nassim Nicholas Taleb', genre: 'nonfiction', section: 2025, isbn: '9780425284629' },
+      { title: 'The Autobiography of Malcolm X', author: 'Malcolm X & Alex Haley', genre: 'nonfiction', section: 2025, cover: 'covers/malcolmx.jpg' },
+      { title: 'The Key Man', author: 'Simon Clark & Will Louch', genre: 'nonfiction', section: 2025, cover: 'covers/keyman.jpg' },
+      { title: 'Amphibious Soul', author: 'Craig Foster', genre: 'nonfiction', section: 2025, cover: 'covers/foster.jpg' },
+    ];
+
+    const GENRE_LABEL = { fiction: 'Fiction', nonfiction: 'Non-fiction' };
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
+    const coverURL = b => b.cover || (b.isbn ? `https://covers.openlibrary.org/b/isbn/${b.isbn}-M.jpg` : null);
+
+    function coverEl(b, cls) {
+      const url = coverURL(b);
+      return url
+        ? `<img class="${cls}" src="${esc(url)}" alt="${esc(b.title)} cover" loading="lazy">`
+        : `<div class="${cls} book__cover--ph">${esc(b.title)}</div>`;
+    }
+
+    function bookCard(b) {
+      return `
+        <div class="book" data-genre="${b.genre}">
+          ${b.fav ? '<div class="book__dot" title="Favourite"></div>' : ''}
+          ${coverEl(b, 'book__cover')}
+          <div class="book__title">${esc(b.title)}</div>
+          <div class="book__author">${esc(b.author)}</div>
+        </div>`;
+    }
+
+    function genreBlock(books, genre) {
+      const list = books.filter(b => b.genre === genre);
+      if (!list.length) return '';
+      return `
+        <div class="genre-block" data-genre="${genre}">
+          <div class="genre-label">${GENRE_LABEL[genre]}<span class="rule"></span></div>
+          <div class="book-grid">${list.map(bookCard).join('')}</div>
+        </div>`;
+    }
+
+    function render() {
+      const content = document.getElementById('content');
+      let html = '';
+
+      // Currently reading
+      const reading = BOOKS.filter(b => b.section === 'reading');
+      if (reading.length) {
+        html += `
+          <div class="section-block">
+            <div class="section-label">Currently Reading</div>
+            <div class="reading-grid">
+              ${reading.map(b => `
+                <div class="read-card" data-genre="${b.genre}">
+                  ${coverEl(b, 'read-card__cover')}
+                  <div>
+                    <div class="read-card__genre">${GENRE_LABEL[b.genre]}</div>
+                    <div class="read-card__title">${esc(b.title)}</div>
+                    <div class="read-card__author">by ${esc(b.author)}</div>
+                  </div>
+                </div>`).join('')}
+            </div>
+          </div>`;
+      }
+
+      // Years descending
+      const years = [...new Set(BOOKS.filter(b => typeof b.section === 'number').map(b => b.section))].sort((a, b) => b - a);
+      years.forEach(year => {
+        const yearBooks = BOOKS.filter(b => b.section === year);
+        html += `
+          <div class="year-block">
+            <div class="year-head"><span class="year-head__label">${year}</span><span class="rule"></span></div>
+            ${genreBlock(yearBooks, 'fiction')}
+            ${genreBlock(yearBooks, 'nonfiction')}
+          </div>`;
+      });
+
+      content.innerHTML = html;
+    }
+
+    // ── Filter: Fiction / Non-fiction / All ──
+    const filters = document.getElementById('filters');
+    filters.addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-link');
+      if (!btn) return;
+      const g = btn.dataset.genre;
+      filters.querySelectorAll('.filter-link').forEach(b => b.classList.toggle('active', b === btn));
+      // Hide whole genre sub-sections (label + grid) and reading cards that don't match
+      document.querySelectorAll('.genre-block').forEach(el => {
+        el.style.display = (g === 'all' || el.dataset.genre === g) ? '' : 'none';
+      });
+      document.querySelectorAll('.read-card').forEach(el => {
+        el.style.display = (g === 'all' || el.dataset.genre === g) ? '' : 'none';
+      });
+    });
+
+    render();
+  </script>
 </body>
 </html>
