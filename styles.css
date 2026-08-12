@@ -392,6 +392,16 @@ body {
   padding: 1px 5px;
   border-radius: 3px;
 }
+.post__figure { margin: 34px 0 0; }
+.post__figure img { max-width: 100%; display: block; border-radius: 4px; }
+.post__figure figcaption {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 12px;
+}
 .post__back {
   font-family: var(--sans);
   font-size: 14px;

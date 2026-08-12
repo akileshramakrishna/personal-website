@@ -65,10 +65,10 @@
   <script>
     /* Most recent articles (keep in sync with writing.html). */
     const ARTICLES = [
+      { title: 'Eldred Beacon', date: 'August 2026', cat: 'reflections', href: 'eldred-beacon.html',
+        excerpt: "As if destiny and fate collided — and here you are. An infinitesimal grain. To begin from within while the world chases without.", cover: 'lighthouse.jpg' },
       { title: 'On Journaling', date: 'May 2026', cat: 'reflections', href: 'on-journaling.html',
         excerpt: "The practical purpose of journaling is to capture the thoughts and emotions of our day. The ethical purpose to reflect on how the events have moved us and formed our thinking.", cover: null },
-      { title: 'Getting Started with Personal Websites', date: 'February 2026', cat: 'other', href: '#',
-        excerpt: "Why everyone should have their own little corner of the internet, and how to make it happen without overthinking it.", cover: null },
     ];
     const CAT_LABEL = { reflections: 'Reflections', photos: 'Photos', climate: 'Climate Finance', other: 'Other Posts' };
     const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
