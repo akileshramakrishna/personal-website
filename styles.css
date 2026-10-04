@@ -394,6 +394,36 @@ body {
 }
 .post__figure { margin: 34px 0 0; }
 .post__figure img { max-width: 100%; display: block; border-radius: 4px; }
+.post__figure img + img { margin-top: 16px; }
+/* Verse / poems: tighter lines within a stanza, space between stanzas */
+.post__verse p { line-height: 1.5; margin-bottom: 1.4em; }
+
+/* In-body links */
+.post__body a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color 0.15s;
+}
+.post__body a:hover { color: var(--muted); }
+
+/* Trailing mention lines (e.g. people/orgs tagged) */
+.post__mentions {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 10px;
+  margin-bottom: 22px;
+}
+.post__mentions a { color: var(--muted); text-underline-offset: 2px; }
+.post__mentions a:hover { color: var(--text); }
+
+/* Small inline section photos (kept compact so they don't dominate) */
+.post__shot { margin: 18px 0 6px; }
+.post__shot img { display: block; width: 100%; max-width: 300px; border-radius: 4px; }
+.post__shots { display: flex; flex-wrap: wrap; gap: 12px; margin: 18px 0 6px; }
+.post__shots img { width: calc(50% - 6px); max-width: 250px; border-radius: 4px; }
 .post__figure figcaption {
   font-family: var(--serif);
   font-style: italic;
